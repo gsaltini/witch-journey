@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Start_Menu.unity
+    guid: b96d75d5c98107a4f9a2709423fcbbee
+  - enabled: 1
+    path: Assets/Scenes/Starting Town.unity
+    guid: a9af3a7ad161b50459e337735b37f4bb
+  - enabled: 1
+    path: Assets/Scenes/Levels/Graveyard/Graveyard.unity
+    guid: f7b559ec62e9f134798198b5a4d99907
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Well_1.unity
+    guid: 741719f6a050a3145b6f5ba12b661f51
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_1.unity
+    guid: ce905a3d3e1e7d844962fbaaff270d94
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_2.unity
+    guid: c95782ae15d9c4f418bed5536923a5dc
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_3.unity
+    guid: 95b89f72060c5b24588b40c2ca07a58c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_4.unity
+    guid: 8ac442879a1662e4ab0fd55b76cd94f2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_5.unity
+    guid: d5437ec40479b5940a4e75b6000614cc
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_6.unity
+    guid: e23ed5e556e0592488326b5d7b8d8eee
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_7.unity
+    guid: c529331174f023143a210fe6f91067b2
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_8.unity
+    guid: 685fcfb587dbad446a99cd7562c38cf6
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_9.unity
+    guid: bb10faea45c68ff4d8cbe9b1e09c5ca6
+  - enabled: 1
+    path: Assets/Scenes/Levels/Fiery Pits/Underground_10.unity
+    guid: cdd185b207e38ba44b1809dc40084031
+  - enabled: 1
+    path: Assets/Scenes/Levels/Forest/Forest_1.unity
+    guid: 276889a6c11c0e8409909a8375341fba
+  - enabled: 1
+    path: Assets/Scenes/Levels/Forest/Forest_2.unity
+    guid: 3e82c9cdccffafd49a66b901c38efc81
+  - enabled: 1
+    path: Assets/Scenes/Levels/Forest/Forest_3.unity
+    guid: a014c5c1ff34c0a4fb274406d0c67e84
+  - enabled: 1
+    path: Assets/Scenes/Levels/Forest/Forest_4.unity
+    guid: 3a3e2773379211b49859ddf375be625f
+  - enabled: 1
+    path: Assets/Scenes/Levels/Forest/Forest_5.unity
+    guid: ba854a25117bc48458f5615913e9ccc1
+  - enabled: 1
+    path: Assets/Scenes/Levels/Forest/Forest_Boss.unity
+    guid: d8685d957789dfd4eaeab9b68181b66e
+  m_configObjects: {}
