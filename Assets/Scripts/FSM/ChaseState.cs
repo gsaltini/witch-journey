@@ -13,22 +13,28 @@ public class ChaseState : State
     public float movementSpeed = 1.0f;
     float attackRange;
     Animator animator;
-    
-    public override void Enter(StateMachine stateMachine) 
+
+    public override void Enter(StateMachine stateMachine)
     {
         enemyTransform = stateMachine.transform;
         playerTransform = stateMachine.playerTransform;
 
-        if (enemyTransform.position.x - playerTransform.position.x > 0) {
+        if (enemyTransform.position.x - playerTransform.position.x > 0)
+        {
             enemyTransform.rotation = Quaternion.LookRotation(Vector3.back);
-        } else {
+        }
+        else
+        {
             enemyTransform.rotation = Quaternion.LookRotation(Vector3.forward);
         }
 
-        if (stateMachine.enemy.meleeAttack) {
+        if (stateMachine.enemy.meleeAttack)
+        {
             attackRange = stateMachine.enemy.meleeRange;
             attackPoint = stateMachine.enemy.attackPoint;
-        } else {
+        }
+        else
+        {
             attackRange = stateMachine.enemy.rangedAttackRange;
             attackPoint = stateMachine.enemy.firePoint;
         }
@@ -42,34 +48,45 @@ public class ChaseState : State
         float height = enemyTransform.position.y - playerTransform.position.y;
         //Vector3.Distance(playerTransform.position, enemyTransform.position)
 
-        if (MathF.Abs(side) > stateMachine.enemy.aggroRange) {
+        if (MathF.Abs(side) > stateMachine.enemy.aggroRange)
+        {
             stateMachine.followingPath = false;
             stateMachine.unit.StopPathPosition();
             stateMachine.nextState = stateMachine.idle;
             Exit(stateMachine);
-        } else if (Mathf.Abs(attackPoint.transform.position.x - playerTransform.position.x)  <= attackRange && stateMachine.enemy.meleeAttack) {
+        }
+        else if (Mathf.Abs(attackPoint.transform.position.x - (playerTransform.position.x)) <= attackRange && stateMachine.enemy.meleeAttack)
+        {
             //Debug.Log(Mathf.Abs(stateMachine.enemy.attackPoint.transform.position.x - playerTransform.position.x) <= attackRange);
             stateMachine.followingPath = false;
             stateMachine.unit.StopPathPosition();
             stateMachine.nextState = stateMachine.attack;
             Exit(stateMachine);
-        } else if (Mathf.Abs(attackPoint.transform.position.x - playerTransform.position.x)  <= attackRange) {
+        }
+        else if (Mathf.Abs(attackPoint.transform.position.x - (playerTransform.position.x)) <= attackRange)
+        {
             stateMachine.followingPath = false;
             stateMachine.unit.StopPathPosition();
             stateMachine.nextState = stateMachine.attack;
             Exit(stateMachine);
-        } else {
-            if (!stateMachine.followingPath) {
+        }
+        else
+        {
+            if (!stateMachine.followingPath)
+            {
                 stateMachine.followingPath = true;
-                if (Mathf.Abs(playerTransform.position.y - enemyTransform.position.y) > 0) {
+                if (Mathf.Abs(playerTransform.position.y - enemyTransform.position.y) > 0)
+                {
                     Vector3 newPosition = new Vector3(playerTransform.position.x, enemyTransform.position.y, playerTransform.position.z);
-                    stateMachine.unit.StartPath(newPosition);
+                    stateMachine.unit.StartPath(playerTransform);
                     animator.SetBool("moving", true);
-                } else {
+                }
+                else
+                {
                     stateMachine.unit.StartPath(playerTransform.position);
                     animator.SetBool("moving", true);
                 }
-                
+
             }
         }
     }

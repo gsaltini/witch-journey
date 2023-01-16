@@ -2,10 +2,10 @@ using System.Runtime.CompilerServices;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
-public class Pathfinding : MonoBehaviour
-{
+public class Pathfinding : MonoBehaviour {
     Grid grid;
 
     void Awake() {
@@ -17,6 +17,8 @@ public class Pathfinding : MonoBehaviour
     // }
 
     public void FindPath(PathRequest pathRequest, Action<PathResult> callback) {
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
 
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
@@ -26,32 +28,27 @@ public class Pathfinding : MonoBehaviour
         startNode.parent = null;
         Node endNode = grid.GetNodeFromWorldPosition(pathRequest.endPosition);
 
-        List<Node> openSet = new List<Node>();
+        Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
         HashSet<Node> closedSet = new HashSet<Node>();
 
         openSet.Add(startNode);
 
         while (openSet.Count > 0) {
-            Node current = openSet[0];
-            
-            for (int i = 1; i < openSet.Count; i++) {
-                if (openSet[i].fCost < current.fCost || (openSet[i].fCost == current.fCost && openSet[i].hCost < current.hCost)) {
-                    current = openSet[i];
-                }
-            }
+            Node current = openSet.RemoveFirst();
 
-            openSet.Remove(current);
             closedSet.Add(current);
 
             if (current == endNode) {
+                sw.Stop();
+                print("Path found " + sw.ElapsedMilliseconds + " ms");
                 pathSuccess = true;
                 break;
             }
 
             List<Node> neighbors = grid.GetNodeNeighbors(current);
-            
+
             foreach (Node node in neighbors) {
-                if ((!node.walkable && !node.flyable) || (node.flyable && !node.walkable && !pathRequest.flying) || closedSet.Contains(node) ) {
+                if ((!node.walkable && !node.flyable) || (node.flyable && !node.walkable && !pathRequest.flying) || closedSet.Contains(node)) {
                     continue;
                 }
 
@@ -108,7 +105,7 @@ public class Pathfinding : MonoBehaviour
         List<Vector3> path = new List<Vector3>();
         Node current = endNode;
 
-        while(current != startNode) {
+        while (current != startNode) {
             path.Add(current.worldPosition);
             current = current.parent;
         }

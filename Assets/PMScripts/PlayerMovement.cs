@@ -87,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         pickupLayer = LayerMask.GetMask("pickup");
 
         knockBackSet = false;
+
     }
 
     /// <summary>
@@ -94,30 +95,39 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        //Debug.Log(horizontalInput);
         //body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
         horizontalMove = horizontalInput * speed;
 
         // Adds Animator Parameter that allows player to transition from idle state to run state, and vice versa
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
+
         // Added a knockBackTimer that starts counting down once the player collides with the trigger collider set around the
         // enemies.
-        if (knockBackCount <= 0) {
+        if (knockBackCount <= 0)
+        {
+
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+            //Debug.Log(body.velocity.x);
             knockBackSet = false;
-        } else {
-            if (knockBackRight && !knockBackSet) {
+        }
+        else
+        {
+            if (knockBackRight && !knockBackSet)
+            {
                 body.velocity = new Vector2(knockBackStrength.x, knockBackStrength.y);
                 knockBackSet = true;
-            } else if (!knockBackRight && !knockBackSet) {
+            }
+            else if (!knockBackRight && !knockBackSet)
+            {
                 body.velocity = new Vector2(-knockBackStrength.x, knockBackStrength.y);
                 knockBackSet = true;
             }
             knockBackCount -= Time.deltaTime;
         }
-        
+
 
 
         //Flip player when moving left-right
@@ -159,7 +169,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 body.velocity = new Vector2(body.velocity.x, jumpPower);
                 canDoubleJump = false;
-            } 
+            }
         }
 
         //flight
@@ -239,7 +249,8 @@ public class PlayerMovement : MonoBehaviour
 
         GameObject.FindObjectOfType<PowerBar>().TakeDamage();
 
-        if (health <= 0) {
+        if (health <= 0)
+        {
             Debug.Log("Player has died!");
             //UnityEditor.EditorApplication.isPlaying = false;
             Application.Quit();
